@@ -1,25 +1,31 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 
 function NavBar() {
-  const [isVisible, setIsVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(false);
   const [scrollPosition, setScrollPosition] = useState(0);
 
-  const handleScroll = useCallback(() => {
+  const handleScroll = () => {
     const st = window.pageYOffset;
-    if (scrollPosition < st) {
+    if (st > 85 && scrollPosition < st) {
       setIsVisible(false);
     } else {
       setIsVisible(true);
     }
     setScrollPosition(st);
-  });
+  };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsVisible(true);
+    }, 100);
+  }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return function cleanupListener() {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [handleScroll]);
+  });
 
   return (
     <nav

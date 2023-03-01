@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import CornerBlobs from "./CornerBlobs";
+// import CornerBlobs from "./CornerBlobs";
 
 function HeroSection() {
   const content = useRef();
@@ -35,7 +35,7 @@ function HeroSection() {
   return (
     <>
       <div className="hero-card">
-        <CornerBlobs wrapperClass={"hero-card__background"}></CornerBlobs>
+        {/* <CornerBlobs wrapperClass={"hero-card__background"}></CornerBlobs> */}
         <div ref={content} className="hero-card__content">
           {items.map((item, i) => (
             <span

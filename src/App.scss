@@ -22,19 +22,41 @@ body {
   position: relative;
 }
 
+.background-blobs {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  path {
+    transition: opacity 300ms var(--easing);
+    opacity: 0.3;
+  }
+  &--upper-left {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+  &--lower-right {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+  }
+}
+
 .nav-bar {
   z-index: 100;
   position: fixed;
+  top: 0px;
+  left: 0px;
   width: 100vw;
   font-family: var(--fontFamilyContent);
   color: var(--fontLightist);
   transition: transform var(--easing) 0.3s;
   &__container {
-    // width: 80%;
     margin: 26px 75px;
     display: flex;
     justify-content: space-between;
     p {
+      align-self: center;
     }
     ol {
       display: flex;
@@ -102,7 +124,7 @@ body {
 }
 
 .container {
-  margin: 10% 20%;
+  // margin: 10% 20%;
 }
 
 .relative-wrapper {
@@ -111,18 +133,11 @@ body {
 
 .hero-card {
   position: relative;
-  background-color: var(--darkBackground);
   justify-content: center;
   display: flex;
-  min-height: max-content;
-  min-width: max-content;
+  min-height: 100vh;
+  min-width: 100vw;
   overflow: hidden;
-  &__background {
-    path {
-      transition: opacity 300ms var(--easing);
-      opacity: 0.3;
-    }
-  }
   &__content {
     position: absolute;
     height: 100%;
@@ -132,7 +147,6 @@ body {
     flex-direction: column;
     row-gap: 26px;
     justify-content: center;
-    // padding: 20px;
     text-align: left;
     p {
       max-width: 70%;
@@ -140,10 +154,42 @@ body {
   }
 }
 
-.corner-blobs {
-  /* height: 500px; */
+.underline {
+  background-color: var(--fontHighlight);
+  height: 1px;
+  // width: 80%;
+  display: block;
+  // opacity: .7;
+  position: relative;
+  // top: -10px;
+  z-index: -1;
 }
 
 .about-section {
+  height: 100vh;
+  padding: 10%;
+  &__heading {
+    width: max-content;
+  }
+  &__img {
+    position: relative;
+    height: 450px;
+    width: 460px;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 5px;
+    &::before {
+      content: "";
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      background-color: var(--dark);
+      opacity: 0.4;
+    }
+  }
+}
+
+.experience-section {
   min-height: 100vh;
+  padding: 10px;
 }
