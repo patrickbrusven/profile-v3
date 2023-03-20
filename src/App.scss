@@ -22,26 +22,6 @@ body {
   position: relative;
 }
 
-.background-blobs {
-  position: absolute;
-  height: 100vh;
-  width: 100vw;
-  path {
-    transition: opacity 300ms var(--easing);
-    opacity: 0.3;
-  }
-  &--upper-left {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-  }
-  &--lower-right {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-  }
-}
-
 .nav-bar {
   z-index: 100;
   position: fixed;
@@ -124,7 +104,12 @@ body {
 }
 
 .container {
-  // margin: 10% 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  padding: 0px 50px;
 }
 
 .relative-wrapper {
@@ -135,13 +120,11 @@ body {
   position: relative;
   justify-content: center;
   display: flex;
-  min-height: 100vh;
-  min-width: 100vw;
   overflow: hidden;
+  height: 95vh;
+  border-radius: 5px;
   &__content {
-    position: absolute;
-    height: 100%;
-    width: 73%;
+    padding: 10%;
     color: #ffb464;
     display: flex;
     flex-direction: column;
@@ -150,6 +133,25 @@ body {
     text-align: left;
     p {
       max-width: 70%;
+    }
+  }
+  .background-blobs {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    path {
+      transition: opacity 300ms var(--easing);
+      opacity: 0.3;
+    }
+    &--upper-left {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+    &--lower-right {
+      position: absolute;
+      bottom: 0px;
+      right: 0px;
     }
   }
 }
