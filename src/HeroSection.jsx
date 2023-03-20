@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
-// import CornerBlobs from "./CornerBlobs";
+import UpperLeftBlob from "./UpperLeftBlob";
+import LowerRightBLob from "./LowerRightBlob";
 
 function HeroSection() {
   const content = useRef();
@@ -14,7 +15,7 @@ function HeroSection() {
     <p className="content-text">
       My unique background in Retail Operations inspired me to become a
       self-taught software engineer. I'm a bit of a polygot who specializes in
-      the modern JavScript ecosystem.
+      the modern JavaScript ecosystem.
     </p>
   );
 
@@ -33,9 +34,12 @@ function HeroSection() {
   }, []);
 
   return (
-    <>
+    <div className="container">
       <div className="hero-card">
-        {/* <CornerBlobs wrapperClass={"hero-card__background"}></CornerBlobs> */}
+        <div className="background-blobs">
+          <UpperLeftBlob wrapperClass={"background-blobs--upper-left"} />
+          <LowerRightBLob wrapperClass={"background-blobs--lower-right"} />
+        </div>
         <div ref={content} className="hero-card__content">
           {items.map((item, i) => (
             <span
@@ -48,7 +52,7 @@ function HeroSection() {
           ))}
         </div>
       </div>
-    </>
+    </div>
   );
 }
 
