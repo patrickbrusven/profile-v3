@@ -2,7 +2,7 @@ import HeroSection from "./HeroSection";
 import NavBar from "./NavBar";
 import AboutSection from "./AboutSection";
 import ExperienceSection from "./ExperienceSection";
-import CanvasBackground from "./CanvasBackground";
+import CanvasBackground from "./canvas/CanvasBackground";
 
 function App() {
   return (
