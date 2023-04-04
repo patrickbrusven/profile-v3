@@ -7,7 +7,7 @@ class Particle {
     this.countUpdate = 1;
     this.x = ctx.canvas.width / 2;
     this.y = ctx.canvas.height / 2;
-    this.size = Math.random() * 0.5 + 1;
+    this.size = Math.random() * 0.5 + 0.5;
     this.speedX = Math.random() * 3 - 1.5;
     this.speedY = Math.random() * 3 - 1.5;
     this.isClose = Math.random() < 0.35;
@@ -17,12 +17,13 @@ class Particle {
   }
 }
 
-function CanvasBackground({ isWarpSpeed = false }) {
+function CanvasBackground({ isWarpSpeed }) {
+  const PARTICLES_LENGTH = 500;
   const [particlesArray, setParticlesArray] = useState([]);
 
   function buildParticlesArray(ctx) {
     let arr = [];
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < PARTICLES_LENGTH; i++) {
       arr.push(new Particle(ctx));
     }
     setParticlesArray((oldArr) => {
@@ -37,7 +38,7 @@ function CanvasBackground({ isWarpSpeed = false }) {
   }
 
   function draw(ctx, particle) {
-    ctx.fillStyle = `rgb(100,255,218, ${parseFloat(particle.opacityValue)})`;
+    ctx.fillStyle = `rgb(230, 241, 255, ${parseFloat(particle.opacityValue)})`;
     ctx.beginPath();
     ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
     ctx.fill();

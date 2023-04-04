@@ -2,6 +2,7 @@ import { useRef, useEffect } from "react";
 
 function CanvasBase({ animate, buildParticlesArray }) {
   const canvasRef = useRef(null);
+  const buildParticlesCount = useRef(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -13,8 +14,10 @@ function CanvasBase({ animate, buildParticlesArray }) {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     });
-
-    buildParticlesArray(ctx);
+    if (buildParticlesCount.current === 0) {
+      buildParticlesArray(ctx);
+      buildParticlesCount.current += buildParticlesCount.current += 1;
+    }
   }, []);
 
   useEffect(() => {
