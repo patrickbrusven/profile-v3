@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-function CanvasBase({ animate, buildParticlesArray }) {
+function CanvasBase({ animate, buildParticlesArray, isInitailLoad }) {
   const canvasRef = useRef(null);
   const buildParticlesCount = useRef(0);
 
@@ -37,7 +37,16 @@ function CanvasBase({ animate, buildParticlesArray }) {
     };
   }, [animate]);
 
-  return <canvas ref={canvasRef} className="canvas" id="canvas-1"></canvas>;
+  return (
+    <canvas
+      ref={canvasRef}
+      className="canvas"
+      style={{
+        opacity: isInitailLoad ? "0" : "1",
+      }}
+      id="canvas-1"
+    ></canvas>
+  );
 }
 
 export default CanvasBase;

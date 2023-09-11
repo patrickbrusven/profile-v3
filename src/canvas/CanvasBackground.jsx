@@ -17,7 +17,7 @@ class Particle {
   }
 }
 
-function CanvasBackground({ isWarpSpeed }) {
+function CanvasBackground({ isWarpSpeed, speed, isInitailLoad }) {
   const PARTICLES_LENGTH = 500;
   const [particlesArray, setParticlesArray] = useState([]);
 
@@ -33,8 +33,8 @@ function CanvasBackground({ isWarpSpeed }) {
 
   function update(particle, ctx) {
     particle.countUpdate += 1;
-    calculateSpeed(particle, isWarpSpeed);
-    particle.opacityValue = calculateOpacity(particle, ctx);
+    calculateSpeed(particle, isWarpSpeed, speed);
+    particle.opacityValue = isInitailLoad ? 0 : calculateOpacity(particle, ctx);
   }
 
   function draw(ctx, particle) {
@@ -64,7 +64,11 @@ function CanvasBackground({ isWarpSpeed }) {
   }
   return (
     <div className="canvas-container">
-      <CanvasBase animate={animate} buildParticlesArray={buildParticlesArray} />
+      <CanvasBase
+        animate={animate}
+        buildParticlesArray={buildParticlesArray}
+        isInitailLoad={isInitailLoad}
+      />
     </div>
   );
 }

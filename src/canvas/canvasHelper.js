@@ -52,21 +52,22 @@ export const calculateOpacity = (particle, canvas) => {
   }
 };
 
-export const calculateSpeed = (particle, isWarpSpeed) => {
+export const calculateSpeed = (particle, isWarpSpeed, speed = 2) => {
+  const warpSpeed = speed;
   if (particle.isClose) {
     const countCalc = particle.countUpdate / 50;
     const increaseBy = countCalc > 1 ? countCalc : 1;
     if (isWarpSpeed) {
-      particle.x += particle.speedX * increaseBy * 2;
-      particle.y += particle.speedY * increaseBy * 2;
+      particle.x += particle.speedX * increaseBy * warpSpeed;
+      particle.y += particle.speedY * increaseBy * warpSpeed;
     } else {
       particle.x += particle.speedX * increaseBy;
       particle.y += particle.speedY * increaseBy;
     }
   } else {
     if (isWarpSpeed) {
-      particle.x += particle.speedX * 2;
-      particle.y += particle.speedY * 2;
+      particle.x += particle.speedX * warpSpeed;
+      particle.y += particle.speedY * warpSpeed;
     } else {
       particle.x += particle.speedX;
       particle.y += particle.speedY;

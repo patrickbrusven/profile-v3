@@ -20,13 +20,24 @@ body {
 
 .App {
   font-family: var(--fontFamilyHeading);
+  color: var(--fontLightist);
   position: relative;
+}
+
+.load-animation {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .canvas-container {
   position: fixed;
+  z-index: -1;
   .canvas {
     background-color: var(--darkBackground);
+    transition: opacity 300ms var(--easing);
   }
 }
 
@@ -167,11 +178,8 @@ body {
 .underline {
   background-color: var(--fontHighlight);
   height: 1px;
-  // width: 80%;
   display: block;
-  // opacity: .7;
   position: relative;
-  // top: -10px;
   z-index: -1;
 }
 
