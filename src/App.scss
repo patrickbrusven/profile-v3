@@ -56,6 +56,48 @@ body {
     transition: opacity 300ms var(--easing);
   }
 }
+.blobs-wrapper {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  @media (min-width: $tablet) {
+    width: 95vw;
+    height: 95vh;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+.background-blobs {
+  position: absolute;
+  height: 100%;
+  width: 150%;
+  @media (min-width: $tablet) {
+    height: 100%;
+    width: 100%;
+  }
+  path {
+    transition: opacity 300ms var(--easing);
+    opacity: 0.3;
+  }
+  &--upper-left {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+  }
+  &--lower-right {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+  }
+}
+.intersection-ref {
+  &--hero {
+    height: 10vh;
+    width: 100vw;
+    background-color: tomato;
+  }
+}
 
 .nav-bar {
   z-index: 100;
@@ -108,7 +150,7 @@ body {
   font-size: clamp(40px, 10vw, 63px);
   margin-bottom: 8px;
   @media (min-width: $tablet) {
-    font-size: 70px
+    font-size: 70px;
   }
   @media (min-width: $tablet-wide) {
     font-size: 92px;
@@ -152,6 +194,11 @@ body {
 .fadeup-enter {
   opacity: 0.01;
   transform: translateY(20px);
+}
+
+.fadedown-leave {
+  opacity: 0.01;
+  transform: translateY(-20px);
 }
 
 .container {

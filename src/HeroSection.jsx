@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import UpperLeftBlob from "./UpperLeftBlob";
 import LowerRightBLob from "./LowerRightBlob";
 import "./HeroStyles.scss";
+import { useInView } from "react-intersection-observer";
 
 function HeroSection() {
   const content = useRef();
@@ -26,6 +27,38 @@ function HeroSection() {
 
   const items = [one, two, three, four];
 
+  const { ref } = useInView({
+    /* Optional options */
+    threshold: 1,
+    onChange: (inView) => {
+      if (inView === true) {
+        transitionOut();
+      } else {
+        transitionIn();
+      }
+    },
+  });
+
+  const transitionOut = () => {
+    const nodes = content.current.children;
+    if (nodes) {
+      for (let i = 0; i < nodes.length; i++) {
+        const element = nodes[i];
+        element.classList.add("fadedown-leave");
+      }
+    }
+  };
+
+  const transitionIn = () => {
+    const nodes = content.current.children;
+    if (nodes) {
+      for (let i = 0; i < nodes.length; i++) {
+        const element = nodes[i];
+        element.classList.remove("fadedown-leave");
+      }
+    }
+  };
+
   useEffect(() => {
     const nodes = content.current.children;
     if (nodes) {
@@ -39,29 +72,24 @@ function HeroSection() {
   }, []);
 
   return (
-    <div className="container">
-      <div className="hero-card">
-        <div className="background-blobs background-blobs--ul">
-          <UpperLeftBlob wrapperClass={"background-blobs--upper-left"} />
-          {/* <LowerRightBLob wrapperClass={"background-blobs--lower-right"} /> */}
-        </div>
-        <div className="background-blobs background-blobs--lr">
-          {/* <UpperLeftBlob wrapperClass={"background-blobs--upper-left"} /> */}
-          <LowerRightBLob wrapperClass={"background-blobs--lower-right"} />
-        </div>
-        <div ref={content} className="hero-card__content">
-          {items.map((item, i) => (
-            <span
-              key={i}
-              className="fadeup-enter fadeup-enter-active"
-              style={{ transitionDelay: `${i + 1}00ms` }}
-            >
-              {item}
-            </span>
-          ))}
+    <>
+      <div className="container">
+        <div className="hero-card">
+          <div ref={content} className="hero-card__content">
+            {items.map((item, i) => (
+              <span
+                key={i}
+                className="fadeup-enter fadeup-enter-active"
+                style={{ transitionDelay: `${i + 1}00ms` }}
+              >
+                {item}
+              </span>
+            ))}
+          </div>
         </div>
       </div>
-    </div>
+      <div ref={ref} className="intersection-ref--hero"></div>
+    </>
   );
 }
 

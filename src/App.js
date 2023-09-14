@@ -3,13 +3,23 @@ import NavBar from "./NavBar";
 import AboutSection from "./AboutSection";
 import ExperienceSection from "./ExperienceSection";
 import CanvasBackground from "./canvas/CanvasBackground";
+import UpperLeftBlob from "./UpperLeftBlob";
+import LowerRightBLob from "./LowerRightBlob";
 import { useEffect, useState } from "react";
+// import { useInView } from "react-intersection-observer";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isWarpSpeed, setIsWarpSpeed] = useState(true);
   const [speed, setSpeed] = useState(30);
   const [isInitailLoad, setIsInitailLoad] = useState(true);
+
+  // const { ref } = useInView({
+  //   threshold: 1,
+  //   onChange: (inView) => {
+  //     console.log(inView);
+  //   },
+  // });
 
   function toggleWarpSpeed() {
     setIsWarpSpeed((current) => !current);
@@ -39,14 +49,26 @@ function App() {
       {isLoading ? (
         <div className="load-animation">{/* <h1>PB</h1> */}</div>
       ) : (
-        <div>
-          {/* <NavBar /> */}
-          <HeroSection />
-          <div className="container">
-            <AboutSection />
+        <>
+          <div className="blobs-wrapper">
+            <div className="background-blobs background-blobs--ul">
+              <UpperLeftBlob wrapperClass={"background-blobs--upper-left"} />
+            </div>
+            <div className="background-blobs background-blobs--lr">
+              <LowerRightBLob wrapperClass={"background-blobs--lower-right"} />
+            </div>
           </div>
-          <ExperienceSection />
-        </div>
+
+          <div>
+            {/* <NavBar /> */}
+            <HeroSection />
+            {/* <div ref={ref} className="intersection-ref--hero"></div> */}
+            <div className="container">
+              <AboutSection />
+            </div>
+            <ExperienceSection />
+          </div>
+        </>
       )}
     </div>
   );
