@@ -40,7 +40,7 @@ function App() {
         <div className="load-animation">{/* <h1>PB</h1> */}</div>
       ) : (
         <div>
-          <NavBar />
+          {/* <NavBar /> */}
           <HeroSection />
           <div className="container">
             <AboutSection />
