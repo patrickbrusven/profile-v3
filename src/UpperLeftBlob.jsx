@@ -1,25 +1,31 @@
-import { useEffect } from "react";
+import { useEffect, forwardRef, useImperativeHandle, useRef } from "react";
 
-function addClass(htmlObj, className) {
-  let arr;
-  arr = Array.from(htmlObj);
-  arr.forEach((el) => {
-    el.classList.add(`${className}`);
-  });
-  arr.reverse().forEach((el, i) => {
-    setTimeout(() => {
-      el.classList.remove(`${className}`);
-    }, `${i + 1}00`);
-  });
-}
-
-function UpperLeftBlob({ wrapperClass }) {
-  useEffect(() => {
-    const collection = document.querySelectorAll(".animate-me");
-    collection.forEach((htmlObj) => {
-      const children = htmlObj.children;
-      addClass(children, "disappear");
+const UpperLeftBlob = forwardRef(({ wrapperClass }, ref) => {
+  const collectionRef = useRef();
+  const animateIn = () => {
+    let arr;
+    arr = Array.from(collectionRef.current.children);
+    arr.reverse().forEach((el, i) => {
+      setTimeout(() => {
+        el.classList.remove(`disappear`);
+      }, `${i + 1}00`);
     });
+  };
+  useImperativeHandle(ref, () => ({
+    animateOut() {
+      let arr;
+      arr = Array.from(collectionRef.current.children);
+      arr.forEach((el, i) => {
+        setTimeout(() => {
+          el.classList.add(`disappear`);
+        }, `${i + 1}00`);
+      });
+    },
+    animateIn,
+  }));
+
+  useEffect(() => {
+    animateIn(collectionRef.current.children);
   }, []);
 
   return (
@@ -31,7 +37,7 @@ function UpperLeftBlob({ wrapperClass }) {
       version="1.1"
       className={wrapperClass}
     >
-      <g className="animate-me" transform="translate(0, 0)">
+      <g ref={collectionRef} className="animate-me" transform="translate(0, 0)">
         <path
           className="disappear"
           d="M407 0C401.9 29.5 396.7 59 390.9 89.2C385.2 119.5 378.7 150.4 359.5 173.1C340.3 195.8 308.3 210.2 286.9 228.8C265.6 247.5 254.9 270.4 242.5 304.1C230.1 337.9 216 382.5 187.7 389.8C159.4 397.1 116.9 367.1 83.2 364.6C49.6 362.1 24.8 387.1 0 412L0 0Z"
@@ -60,6 +66,6 @@ function UpperLeftBlob({ wrapperClass }) {
       </g>
     </svg>
   );
-}
+});
 
 export default UpperLeftBlob;

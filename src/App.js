@@ -5,21 +5,28 @@ import ExperienceSection from "./ExperienceSection";
 import CanvasBackground from "./canvas/CanvasBackground";
 import UpperLeftBlob from "./UpperLeftBlob";
 import LowerRightBLob from "./LowerRightBlob";
-import { useEffect, useState } from "react";
-// import { useInView } from "react-intersection-observer";
+import { useEffect, useState, useRef } from "react";
+import { useInView } from "react-intersection-observer";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [isWarpSpeed, setIsWarpSpeed] = useState(true);
   const [speed, setSpeed] = useState(30);
   const [isInitailLoad, setIsInitailLoad] = useState(true);
-
-  // const { ref } = useInView({
-  //   threshold: 1,
-  //   onChange: (inView) => {
-  //     console.log(inView);
-  //   },
-  // });
+  const heroLRBlob = useRef();
+  const heroULBlob = useRef();
+  const { ref } = useInView({
+    threshold: 1,
+    onChange: (inView) => {
+      if (inView === true) {
+        heroLRBlob.current.animateOut();
+        heroULBlob.current.animateOut();
+      } else {
+        heroLRBlob.current.animateIn();
+        heroULBlob.current.animateIn();
+      }
+    },
+  });
 
   function toggleWarpSpeed() {
     setIsWarpSpeed((current) => !current);
@@ -51,18 +58,26 @@ function App() {
       ) : (
         <>
           <div className="blobs-wrapper">
-            <div className="background-blobs background-blobs--ul">
-              <UpperLeftBlob wrapperClass={"background-blobs--upper-left"} />
-            </div>
-            <div className="background-blobs background-blobs--lr">
-              <LowerRightBLob wrapperClass={"background-blobs--lower-right"} />
+            <div className="blobs-wrapper-relative">
+              <div className="blob-wrapper">
+                <UpperLeftBlob
+                  ref={heroULBlob}
+                  wrapperClass={"blob-wrapper--ul"}
+                />
+              </div>
+              <div className="blob-wrapper blob-wrapper--parent-lr">
+                <LowerRightBLob
+                  ref={heroLRBlob}
+                  wrapperClass={"blob-wrapper--lr"}
+                />
+              </div>
             </div>
           </div>
 
           <div>
-            {/* <NavBar /> */}
+            <NavBar />
             <HeroSection />
-            {/* <div ref={ref} className="intersection-ref--hero"></div> */}
+            <div ref={ref} className="intersection-ref--hero"></div>
             <div className="container">
               <AboutSection />
             </div>

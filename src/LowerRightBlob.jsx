@@ -1,25 +1,32 @@
-import { useEffect } from "react";
+import { useEffect, forwardRef, useImperativeHandle, useRef } from "react";
 
-function addClass(htmlObj, className) {
-  let arr;
-  arr = Array.from(htmlObj);
-  arr.forEach((el) => {
-    el.classList.add(`${className}`);
-  });
-  arr.reverse().forEach((el, i) => {
-    setTimeout(() => {
-      el.classList.remove(`${className}`);
-    }, `${i + 1}00`);
-  });
-}
+const LowerRightBLob = forwardRef(({ wrapperClass }, ref) => {
+  const collectionRef = useRef();
+  const animateIn = () => {
+      let arr;
+      arr = Array.from(collectionRef.current.children);
+      arr.reverse().forEach((el, i) => {
+        setTimeout(() => {
+          el.classList.remove(`disappear`);
+        }, `${i + 1}00`);
+      });
+    }
 
-function LowerRightBLob({ wrapperClass }) {
+  useImperativeHandle(ref, () => ({
+    animateOut() {
+      let arr;
+      arr = Array.from(collectionRef.current.children);
+      arr.forEach((el, i) => {
+        setTimeout(() => {
+          el.classList.add(`disappear`);
+        }, `${i + 1}00`);
+      });
+    },
+    animateIn,
+  }));
+
   useEffect(() => {
-    const collection = document.querySelectorAll(".animate-me");
-    collection.forEach((htmlObj) => {
-      const children = htmlObj.children;
-      addClass(children, "disappear");
-    });
+    animateIn(collectionRef.current.children);
   }, []);
 
   return (
@@ -31,7 +38,11 @@ function LowerRightBLob({ wrapperClass }) {
       version="1.1"
       className={wrapperClass}
     >
-      <g className="animate-me" transform="translate(900, 600)">
+      <g
+        ref={collectionRef}
+        className="animate-me"
+        transform="translate(900, 600)"
+      >
         <path
           className="disappear"
           d="M-432.7 0C-427.6 -32.5 -422.5 -65 -406.5 -92.8C-390.6 -120.5 -363.7 -143.5 -341.5 -164.4C-319.2 -185.4 -301.7 -204.2 -290.1 -231.3C-278.4 -258.4 -272.7 -293.9 -256.3 -321.3C-239.8 -348.8 -212.6 -368.3 -183.5 -381.1C-154.5 -394 -123.5 -400.2 -92.6 -405.6C-61.7 -410.9 -30.8 -415.5 0 -420L0 0Z"
@@ -60,6 +71,6 @@ function LowerRightBLob({ wrapperClass }) {
       </g>
     </svg>
   );
-}
+});
 
 export default LowerRightBLob;
