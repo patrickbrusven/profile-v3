@@ -1,3 +1,14 @@
+// breakpoints
+$phone: 400px;
+$phone-wide: 480px;
+$phablet: 560px;
+$tablet-small: 640px;
+$tablet: 768px;
+$tablet-wide: 1024px;
+$container: 1103px;
+$desktop: 1248px;
+$desktop-wide: 1440px;
+
 :root {
   --easing: cubic-bezier(0.645, 0.045, 0.355, 1);
   // --darkBackground: #205072;
@@ -14,6 +25,9 @@
   --fontFamilyHeading: "SF-Pro", sans-serif;
   --fontFamilyContent: "RobotoMono", monospace;
 }
+
+// application base
+
 body {
   background-color: var(--darkBackground);
 }
@@ -23,6 +37,8 @@ body {
   color: var(--fontLightist);
   position: relative;
 }
+
+// globals
 
 .load-animation {
   width: 100vw;
@@ -38,6 +54,76 @@ body {
   .canvas {
     background-color: var(--darkBackground);
     transition: opacity 300ms var(--easing);
+  }
+}
+.blobs-wrapper {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+
+  @media (min-width: $tablet) {
+    width: 95vw;
+    height: 95vh;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &-relative {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.blob-wrapper {
+  position: absolute;
+  height: 150%;
+  width: 150%;
+  @media (min-width: $tablet) {
+    height: 100%;
+    width: 100%;
+  }
+  path {
+    transition: opacity 300ms var(--easing);
+    opacity: 0.3;
+  }
+  &--parent-lr {
+    right: 0px;
+    bottom: 0px;
+  }
+  &--ul {
+    position: absolute;
+    top: -19px;
+    left: -14px;
+    @media (min-width: $tablet) {
+      top: 0px;
+      left: 0px;
+    }
+  }
+  &--lr {
+    position: absolute;
+    bottom: -15px;
+    right: -22px;
+    @media (min-width: $tablet) {
+      bottom: 0px;
+      right: 0px;
+    }
+  }
+}
+
+.hero-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+}
+
+.observer-blobs {
+  position: absolute;
+  bottom: 25%;
+  height: 50%;
+  width: 100%;
+  &--ref {
+    position: relative;
   }
 }
 
@@ -83,28 +169,44 @@ body {
 .highlight-text {
   font-family: var(--fontFamilyContent);
   color: var(--fontHighlight);
-  font-size: 1.25rem;
+  font-size: 1rem;
+  margin-bottom: 15px;
 }
 
 .heading-text {
   color: var(--fontLightist);
-  font-size: 7rem;
-  line-height: 125px;
+  font-size: clamp(40px, 10vw, 63px);
+  margin-bottom: 8px;
+  @media (min-width: $tablet) {
+    font-size: 70px;
+  }
+  @media (min-width: $tablet-wide) {
+    font-size: 92px;
+  }
 }
 
 .subheading-text {
   color: var(--fontlight);
-  font-size: 5rem;
-  line-height: 73px;
+  font-size: clamp(40px, 10vw, 63px);
+  margin-bottom: 26px;
   letter-spacing: -1px;
+  line-height: clamp(38px, 9vw, 60px);
+  @media (min-width: $tablet) {
+    font-size: 70px;
+    line-height: 50px;
+  }
+  @media (min-width: $tablet-wide) {
+    font-size: 65px;
+    line-height: 60px;
+  }
 }
 
 .content-text {
   color: var(--fontlight);
   font-family: var(--fontFamilyContent);
-  font-size: 1.25rem;
-  line-height: 28px;
+  line-height: 20px;
   letter-spacing: -0.5px;
+  font-size: 1rem;
 }
 
 .disappear {
@@ -122,57 +224,25 @@ body {
   transform: translateY(20px);
 }
 
+.fadedown-leave {
+  opacity: 0.01;
+  transform: translateY(-20px);
+}
+
 .container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   width: 100vw;
-  padding: 0px 50px;
+  padding: 0px 0px;
+  @media (min-width: $tablet) {
+    padding: 0px 50px;
+  }
 }
 
 .relative-wrapper {
   position: relative;
-}
-
-.hero-card {
-  position: relative;
-  justify-content: center;
-  display: flex;
-  overflow: hidden;
-  height: 95vh;
-  border-radius: 5px;
-  &__content {
-    padding: 10%;
-    color: #ffb464;
-    display: flex;
-    flex-direction: column;
-    row-gap: 26px;
-    justify-content: center;
-    text-align: left;
-    p {
-      max-width: 70%;
-    }
-  }
-  .background-blobs {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    path {
-      transition: opacity 300ms var(--easing);
-      opacity: 0.3;
-    }
-    &--upper-left {
-      position: absolute;
-      top: 0px;
-      left: 0px;
-    }
-    &--lower-right {
-      position: absolute;
-      bottom: 0px;
-      right: 0px;
-    }
-  }
 }
 
 .underline {
