@@ -5,8 +5,8 @@ import ExperienceSection from "./ExperienceSection";
 import CanvasBackground from "./canvas/CanvasBackground";
 import UpperLeftBlob from "./UpperLeftBlob";
 import LowerRightBLob from "./LowerRightBlob";
+import IntersectionObserver from "./IntersectionObserver";
 import { useEffect, useState, useRef } from "react";
-import { useInView } from "react-intersection-observer";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -15,18 +15,16 @@ function App() {
   const [isInitailLoad, setIsInitailLoad] = useState(true);
   const heroLRBlob = useRef();
   const heroULBlob = useRef();
-  const { ref } = useInView({
-    threshold: 1,
-    onChange: (inView) => {
-      if (inView === true) {
-        heroLRBlob.current.animateOut();
-        heroULBlob.current.animateOut();
-      } else {
-        heroLRBlob.current.animateIn();
-        heroULBlob.current.animateIn();
-      }
-    },
-  });
+
+  const updateHeroObserver = (data) => {
+    if (data === false) {
+      heroLRBlob.current.animateOut();
+      heroULBlob.current.animateOut();
+    } else {
+      heroLRBlob.current.animateIn();
+      heroULBlob.current.animateIn();
+    }
+  };
 
   function toggleWarpSpeed() {
     setIsWarpSpeed((current) => !current);
@@ -75,13 +73,20 @@ function App() {
           </div>
 
           <div>
-            <NavBar />
-            <HeroSection />
-            <div ref={ref} className="intersection-ref--hero"></div>
-            <div className="container">
+            {/* <NavBar /> */}
+            <div className="hero-wrapper">
+              <HeroSection />
+              <IntersectionObserver
+                observerClass="observer-blobs--ref"
+                wrapperClass="observer-blobs"
+                threshold={1}
+                setValue={updateHeroObserver}
+              />
+            </div>
+            {/* <div className="container">
               <AboutSection />
             </div>
-            <ExperienceSection />
+            <ExperienceSection /> */}
           </div>
         </>
       )}

@@ -111,11 +111,19 @@ body {
   }
 }
 
-.intersection-ref {
-  &--hero {
-    height: 10vh;
-    width: 100vw;
-    // background-color: tomato;
+.hero-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100%;
+}
+
+.observer-blobs {
+  position: absolute;
+  bottom: 25%;
+  height: 50%;
+  width: 100%;
+  &--ref {
+    position: relative;
   }
 }
 
