@@ -1,7 +1,7 @@
 import HeroSection from "./HeroSection";
-import NavBar from "./NavBar";
-import AboutSection from "./AboutSection";
-import ExperienceSection from "./ExperienceSection";
+// import NavBar from "./NavBar";
+// import AboutSection from "./AboutSection";
+// import ExperienceSection from "./ExperienceSection";
 import CanvasBackground from "./canvas/CanvasBackground";
 import UpperLeftBlob from "./UpperLeftBlob";
 import LowerRightBLob from "./LowerRightBlob";
