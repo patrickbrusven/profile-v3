@@ -7,7 +7,8 @@ class Particle {
     this.countUpdate = 1;
     this.x = ctx.canvas.width / 2;
     this.y = ctx.canvas.height / 2;
-    this.size = Math.random() * 0.5 + 0.5;
+    this.size = Math.random() * 0.5 + 0.3;
+    // this.size = Math.random() * 0.5 + 0.5;
     this.speedX = Math.random() * 3 - 1.5;
     this.speedY = Math.random() * 3 - 1.5;
     this.isClose = Math.random() < 0.35;
