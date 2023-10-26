@@ -56,14 +56,13 @@ function HeroSection() {
   const two = <h2 className="heading-text">Patrick Brusven.</h2>;
   const three = (
     <h3 className="subheading-text">
-      I'm a Front-End leaning <br></br>Full-Stack Developer.
+      I'm a Front-End leaning<br></br>Full-Stack Developer.
     </h3>
   );
   const four = (
     <p className="content-text hero-card__content__description">
-      My background in Retail Management inspired me to become a
-      self-taught developer. I'm a bit of a polygot who specializes in
-      the modern JavaScript ecosystem.
+      Providing client-centered solutions in the modern digital world. I'm a bit of a polygot who specializes in
+      the JavaScript ecosystem.
     </p>
   );
 
