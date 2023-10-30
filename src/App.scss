@@ -84,6 +84,10 @@ body {
   position: absolute;
   height: 150%;
   width: 150%;
+  @media screen and (orientation: landscape) {
+    height: 100%;
+    width: 100%;
+  }
   @media (min-width: $tablet) {
     height: 100%;
     width: 100%;
