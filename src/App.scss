@@ -60,6 +60,7 @@ body {
 .blobs-wrapper {
   position: fixed;
   height: 100vh;
+  height: -webkit-fill-available;
   width: 100vw;
   overflow: hidden;
 
@@ -119,6 +120,7 @@ body {
   position: relative;
   width: 100vw;
   height: 100vh;
+  height: -webkit-fill-available;
   overflow: hidden;
 }
 
